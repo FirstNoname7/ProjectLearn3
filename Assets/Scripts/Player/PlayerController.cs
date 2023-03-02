@@ -6,6 +6,7 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        //то, что закомментировано - это доп. варик ограничения прыжка (тип если перс какое-то время находится в воздухе, то ему в течении времени прыжка нельзя повторно прыгать)
         public AudioClip jumpSound;
         public AudioSource playerAudio;
         public AudioClip boomSound;
@@ -15,6 +16,7 @@ namespace Player
         private float jumpForce = 10;
         public bool gameOver = false;
         private bool _onGrounded;
+        //private bool _stopJump = false;
 
         private Animator playerAnim;
 
@@ -33,6 +35,15 @@ namespace Player
                 playerAnim.SetTrigger("Jump_trig");
                 playerAudio.PlayOneShot(jumpSound);
             }
+            //if (Input.GetKeyDown(KeyCode.Space) && !_stopJump && !gameOver)
+            //{
+            //    rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //    _onGrounded = false;
+            //    playerAnim.SetTrigger("Jump_trig");
+            //    playerAudio.PlayOneShot(jumpSound);
+            //    StartCoroutine(StopJump());
+            //}
+
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -52,6 +63,14 @@ namespace Player
                 _onGrounded = true;
             }
         }
+
+        //IEnumerator StopJump()
+        //{
+        //    _stopJump = true;
+        //    yield return new WaitForSeconds(2);
+        //    _stopJump = false;
+        //}
+
     }
 }
 
